@@ -9,7 +9,7 @@ const fetchUsers = createAsyncThunk('users/fetch', async () => {
     const response = await axios.get('http://localhost:3005/users');
 
     // DEV ONLY - fake lag time
-    await pause(3000);
+    await pause(10000);
 
     return response.data;
 });
