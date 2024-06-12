@@ -1,18 +1,34 @@
 {
-    "users": [
-        {
-            "id": 1,
-            "name": "Myra"
-        },
-        {
-            "id": 2,
-            "name": "Pyra"
-        },
-        {
-            "id": 3,
-            "name": "Lyra"
-        }
-    ],
-    "albums": [],
-    "photos": []
+  "users": [
+    {
+      "id": "1",
+      "name": "Myra"
+    },
+    {
+      "id": "2",
+      "name": "Pyra"
+    },
+    {
+      "id": "3",
+      "name": "Lyra"
+    },
+    {
+      "id": "64f6",
+      "name": "Irving Green"
+    },
+    {
+      "id": "7cad",
+      "name": "Pat Moen"
+    },
+    {
+      "id": "96e7",
+      "name": "Jackie Monahan"
+    },
+    {
+      "id": "a288",
+      "name": "Bennie Fahey"
+    }
+  ],
+  "albums": [],
+  "photos": []
 }
