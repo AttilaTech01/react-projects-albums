@@ -1,28 +1,50 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, fetchUsers } from "../store";
 import Skeleton from "./Skeleton";
 import Button from "./Button";
 
 function UsersList() {
+    const [isLoadingUsers, setIsLoadingUsers] = useState(false);
+    const [isLoadingUsersError, setIsLoadingUsersError] = useState(null);
+    const [isAddingUser, setIsAddingUser] = useState(false);
+    const [isAddingUserError, setIsAddingUserError] = useState(null);
+
     const dispatch = useDispatch();
-    const { isLoading, data, error } = useSelector((state) => {
+    const { data } = useSelector((state) => {
         return state.users;
     });
 
     useEffect(() => {
-        dispatch(fetchUsers());
+        setIsLoadingUsers(true);
+        dispatch(fetchUsers())
+            .unwrap()
+            .catch((err) => {
+                setIsLoadingUsersError(err);
+            })
+            .finally(() => {
+                setIsLoadingUsers(false);
+            });
+
     }, [dispatch]);
 
     const handleAddUser = () => {
-        dispatch(addUser());
+        setIsAddingUser(true);
+        dispatch(addUser())
+            .unwrap()
+            .catch((err) => {
+                setIsAddingUserError(err);
+            })
+            .finally(() => {
+                setIsAddingUser(false);
+            });
     };
 
-    if (isLoading) {
+    if (isLoadingUsers) {
         return <Skeleton times={6} className="h-10 w-full" />;
     }
 
-    if (error) {
+    if (isLoadingUsersError) {
         return <div>Error while fetching data ...</div>;
     }
 
@@ -40,9 +62,10 @@ function UsersList() {
         <div>
             <div className="flex flex-row justify-between m-3">
                 <h1 className="m-2 text-xl">
-                    <Button onClick={handleAddUser}>
-                        + Add User
-                    </Button>
+                { isAddingUser 
+                    ? 'Adding user'
+                    : <Button onClick={handleAddUser}>+ Add User</Button> 
+                }    
                 </h1>
             </div>
             {renderedUsers}

@@ -12,6 +12,7 @@ Slices
 ### CSS
 
 Skeleton loading
+Fine-Grained Loading State
 
 ### Others
 
