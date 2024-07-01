@@ -1,50 +1,31 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect} from "react";
+import { useSelector } from "react-redux";
 import { addUser, fetchUsers } from "../store";
 import Skeleton from "./Skeleton";
 import Button from "./Button";
+import { useThunk } from '../hooks/useThunk';
 
 function UsersList() {
-    const [isLoadingUsers, setIsLoadingUsers] = useState(false);
-    const [isLoadingUsersError, setIsLoadingUsersError] = useState(null);
-    const [isAddingUser, setIsAddingUser] = useState(false);
-    const [isAddingUserError, setIsAddingUserError] = useState(null);
+    const [doFetchUsers, isLoadingUsers, loadingUsersError] = useThunk(fetchUsers);
+    const [doAddUser, isAddingUser, addingUserError] = useThunk(addUser);
 
-    const dispatch = useDispatch();
     const { data } = useSelector((state) => {
         return state.users;
     });
 
     useEffect(() => {
-        setIsLoadingUsers(true);
-        dispatch(fetchUsers())
-            .unwrap()
-            .catch((err) => {
-                setIsLoadingUsersError(err);
-            })
-            .finally(() => {
-                setIsLoadingUsers(false);
-            });
-
-    }, [dispatch]);
+        doFetchUsers();
+    }, [doFetchUsers]);
 
     const handleAddUser = () => {
-        setIsAddingUser(true);
-        dispatch(addUser())
-            .unwrap()
-            .catch((err) => {
-                setIsAddingUserError(err);
-            })
-            .finally(() => {
-                setIsAddingUser(false);
-            });
+        doAddUser();
     };
 
     if (isLoadingUsers) {
         return <Skeleton times={6} className="h-10 w-full" />;
     }
 
-    if (isLoadingUsersError) {
+    if (loadingUsersError) {
         return <div>Error while fetching data ...</div>;
     }
 
@@ -63,9 +44,10 @@ function UsersList() {
             <div className="flex flex-row justify-between m-3">
                 <h1 className="m-2 text-xl">
                 { isAddingUser 
-                    ? 'Adding user'
+                    ? 'Adding user...'
                     : <Button onClick={handleAddUser}>+ Add User</Button> 
-                }    
+                }
+                { addingUserError && 'Error adding user...' }    
                 </h1>
             </div>
             {renderedUsers}
