@@ -1,7 +1,11 @@
+import { Fragment } from "react";
 import { GoTrashcan } from "react-icons/go";
 import Button from "./Button";
 import { deleteUser } from '../store';
 import { useThunk } from "../hooks/useThunk";
+import AlbumsList from "./AlbumsList";
+import ExpandablePanel from "./ExpandablePanel";
+
 
 function UsersListItem({ user }) {
     const [doDeleteUser, isLoading, error] = useThunk(deleteUser);
@@ -10,18 +14,20 @@ function UsersListItem({ user }) {
         doDeleteUser(user);
     };
 
+    const header = (
+        <Fragment>
+            <Button className='mr-3' loading={isLoading} onClick={handleClick}>
+                <GoTrashcan />
+            </Button>
+            {error && <div>Error deleting user!</div>}
+            {user.name}
+        </Fragment>
+    );
+
     return (
-        <div className="mb-2 border rounded">
-            <div className="flex p-2 justify-between items-center curser-pointer">
-                <div className="flex flex-row items-center justify-between">
-                    <Button className='mr-3' loading={isLoading} onClick={handleClick}>
-                        <GoTrashcan />
-                    </Button>
-                    {error && <div>Error deleting user!</div>}
-                    {user.name}
-                </div>
-            </div>
-        </div>
+        <ExpandablePanel header={header}>
+            <AlbumsList user={user} />
+        </ExpandablePanel>
     );
 };
 
