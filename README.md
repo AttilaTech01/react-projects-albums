@@ -6,8 +6,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ### reduxjs/toolkit
 
-Thunks
 Slices
+Thunks
+Redux Toolkit Query
 
 ### CSS
 

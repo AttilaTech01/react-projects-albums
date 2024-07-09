@@ -45,6 +45,12 @@
       "name": "Essie Schmitt"
     }
   ],
-  "albums": [],
+  "albums": [
+    {
+      "id": 78,
+      "title": "Saturn to Mars",
+      "userId": 1
+    }
+  ],
   "photos": []
 }
