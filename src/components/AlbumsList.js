@@ -5,7 +5,7 @@ import Button from './Button';
 
 function AlbumsList({ user }) {
     const { data, error, isLoading } = useFetchAlbumsQuery(user);
-    const [ addAlbum ] = useAddAlbumMutation();
+    const [ addAlbum, results ] = useAddAlbumMutation();
 
     const handleAddAlbum = async () => {
         await addAlbum(user);
@@ -27,9 +27,9 @@ function AlbumsList({ user }) {
 
     return (
         <div>
-            <div>
-                Albums for {user.name}
-                <Button onClick={handleAddAlbum}>
+            <div className="m-2 flex flex-row items-center justify-between">
+                <h3 className="text-lg font-bold">Albums for {user.name}</h3>
+                <Button onClick={handleAddAlbum} loading={results.isLoading}>
                     + Album
                 </Button>    
             </div>
