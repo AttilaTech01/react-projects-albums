@@ -8,7 +8,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Slices
 Thunks
-Redux Toolkit Query
+Redux Toolkit Query (api, query, mutation, tag)
 
 ### CSS
 
