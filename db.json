@@ -47,9 +47,19 @@
   ],
   "albums": [
     {
-      "id": 78,
+      "id": "78",
       "title": "Saturn to Mars",
       "userId": 1
+    },
+    {
+      "id": "582e",
+      "userId": "3",
+      "title": "Luxurious Steel Salad"
+    },
+    {
+      "id": "db4c",
+      "userId": "3",
+      "title": "Handcrafted Bronze Shirt"
     }
   ],
   "photos": []

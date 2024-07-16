@@ -37,6 +37,19 @@ const albumsApi = createApi({
                     };
                 }
             }),
+            deleteAlbum: builder.mutation({
+                // arg is whatever you passed to your hook as argument
+                // in our case, arg is an album object
+                invalidatesTags: (result, error, arg) => {
+                    return [{ type: 'Album', id: arg.userId }]
+                },
+                query: (album) => {
+                    return {
+                        url: `/albums/${album.id}`,
+                        method: 'DELETE'
+                    };
+                }
+            }),
             fetchAlbums: builder.query({
                 // arg is whatever you passed to your hook as argument
                 // in our case, arg is a user object
@@ -58,7 +71,8 @@ const albumsApi = createApi({
 });
 
 export const { 
-    useAddAlbumMutation, 
+    useAddAlbumMutation,
+    useDeleteAlbumMutation,
     useFetchAlbumsQuery 
 } = albumsApi;
 
