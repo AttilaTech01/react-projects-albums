@@ -24,7 +24,7 @@ const albumsApi = createApi({
                 // arg is whatever you passed to your hook as argument
                 // in our case, arg is a user object
                 invalidatesTags: (result, error, arg) => {
-                    return [{ type: 'Album', id: arg.id }]
+                    return [{ type: 'UsersAlbums', id: arg.id }]
                 },
                 query: (user) => {
                     return {
@@ -41,7 +41,7 @@ const albumsApi = createApi({
                 // arg is whatever you passed to your hook as argument
                 // in our case, arg is an album object
                 invalidatesTags: (result, error, arg) => {
-                    return [{ type: 'Album', id: arg.userId }]
+                    return [{ type: 'Album', id: arg.id }]
                 },
                 query: (album) => {
                     return {
@@ -54,7 +54,13 @@ const albumsApi = createApi({
                 // arg is whatever you passed to your hook as argument
                 // in our case, arg is a user object
                 providesTags: (result, error, arg) => {
-                    return [{ type: 'Album', id: arg.id }]
+                    const tags = result.map((album) => {
+                        return { type: 'Album', id: album.id };
+                    });
+
+                    tags.push({ type: 'UsersAlbums', id: arg.id });
+
+                    return tags;
                 },
                 query: (user) => {
                     return {

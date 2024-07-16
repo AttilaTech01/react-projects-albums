@@ -9,7 +9,7 @@ function ExpandablePanel({ header, children }) {
     };
 
     return (
-        <div className="mb-2 border rounded">
+        <div className="mb-2 border border-black rounded">
             <div className="flex p-2 justify-between items-center">
                 <div className="flex flex-row items-center justify-between">
                     {header}
@@ -19,7 +19,7 @@ function ExpandablePanel({ header, children }) {
                 </div>
             </div>
             {expanded && 
-                <div className="p-2 border-t">
+                <div className="p-2 border-t bg-orange-100">
                     {children}
                 </div>
             }
