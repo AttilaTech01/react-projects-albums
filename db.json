@@ -62,5 +62,21 @@
       "title": "Handcrafted Bronze Shirt"
     }
   ],
-  "photos": []
+  "photos": [
+    {
+      "id": "19cd",
+      "albumId": "78",
+      "url": "https://loremflickr.com/150/150/abstract?lock=51230"
+    },
+    {
+      "id": "401d",
+      "albumId": "78",
+      "url": "https://loremflickr.com/150/150/abstract?lock=17040"
+    },
+    {
+      "id": "90c8",
+      "albumId": "78",
+      "url": "https://loremflickr.com/150/150/abstract?lock=37235"
+    }
+  ]
 }
